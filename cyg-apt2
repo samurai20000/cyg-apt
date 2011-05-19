@@ -44,7 +44,7 @@ mirror = 'http://ftp.jaist.ac.jp/pub/cygwin'
 downloads = root + '/var/cache/setup/' + urllib.quote (mirror, '').lower ()
 
 config = root + '/etc/setup'
-setup_ini = config + '/setup-2.ini'
+setup_ini = config + '/setup-legacy.ini'
 installed_db = config + '/installed.db'
 installed_db_magic = 'INSTALLED.DB 2\n'
 
@@ -343,12 +343,12 @@ def update ():
 	'''setup.ini'''
 	if not os.path.exists (downloads):
 		os.makedirs (downloads)
-	os.system ('rm -f %s/%s' % (downloads, 'setup-2.ini'))
+	os.system ('rm -f %s/%s' % (downloads, 'setup-legacy.ini'))
 	# urllib
-	os.system ('cd %s && wget -c %s/%s' % (downloads, mirror, 'setup-2.ini'))
+	os.system ('cd %s && wget -c %s/%s' % (downloads, mirror, 'setup-legacy.ini'))
 	if os.path.exists (setup_ini):
-		os.system ('cd %s && mv -f setup-2.ini setup-2.bak' % config)
-	os.system ('mv -f %s/setup-2.ini %s' % (downloads, config))
+		os.system ('cd %s && mv -f setup-legacy.ini setup-legacy.bak' % config)
+	os.system ('mv -f %s/setup-legacy.ini %s' % (downloads, config))
 
 def get_version ():
 	if not dists[distname].has_key (packagename) \
